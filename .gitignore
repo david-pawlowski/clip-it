@@ -1,0 +1,6 @@
+.venv
+*.mp4
+*.avi
+*.png
+.vscode
+.DS_Store
