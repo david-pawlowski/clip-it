@@ -4,17 +4,15 @@ from mss import mss
 
 MAC_WIDTH = 1440
 MAC_HEIGHT = 900
+FPS = 30
 FRAME_SIZE = tuple((MAC_WIDTH * 2, MAC_HEIGHT * 2))
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('output.mp4', fourcc, 60, (FRAME_SIZE))
+out = cv2.VideoWriter('output.mp4', fourcc, FPS, (FRAME_SIZE))
+monitor = {"top": 0, "left": 0, "width": 1440, "height": 900}
 
-with mss() as sct:
-    monitor = {"top": 0, "left": 0, "width": 1440, "height": 900}
-    while True:
+with mss(with_cursor=True) as sct:
+    for _ in range(FPS * 10):
         img = np.array(sct.grab(monitor))
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         out.write(img)
-
-        if cv2.waitKey(2) & 0xFF == ord("q"):
-            cv2.destroyAllWindows()
-            break
+out.release()
