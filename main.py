@@ -7,8 +7,7 @@ def main():
     If 'clip it' said records screen for 10 seconds and saves it to output.mp4
     """
     while True:
-        text = recognize_speech()
-        if not text == 'clip it':
+        if not recognize_speech() == 'clip it':
             continue
         return record()
 
