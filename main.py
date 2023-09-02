@@ -22,6 +22,7 @@ def main():
     while True:
         if not recognize_speech() == "clip it":
             continue
+        # TODO: MAKES NO SENSE AS T1 AND T2 ARE INFINITE LOOPS
         t2.join()
         t1.join()
         return make_video("screenshoots", "output.mp4")

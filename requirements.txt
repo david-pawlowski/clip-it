@@ -1,5 +1,4 @@
 opencv-python
-numpy
-mss
 pyaudio
 SpeechRecognition
+Pillow
