@@ -1,8 +1,6 @@
-import time
 from PIL import ImageGrab
 import datetime
 import os
-from threading import Thread
 
 SS_DIR = "screenshoots"
 DURATION = 10
@@ -30,9 +28,3 @@ def delete_old_screenshots():
             if not is_file_older_than(f"{SS_DIR}/{file}", DURATION):
                 continue
             os.remove(f"{SS_DIR}/{file}")
-
-
-if __name__ == "__main__":
-    Thread(target=do_screenshots).start()
-    time.sleep(DURATION)
-    Thread(target=delete_old_screenshots).start()
