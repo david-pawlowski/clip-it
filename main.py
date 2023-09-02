@@ -5,16 +5,27 @@ from screenshots import delete_old_screenshots, do_screenshots
 from video import make_video
 
 
+DURATION = 10
+SS_DIR = "screenshoots"
+
+
 def main():
     """
     If 'clip it' said it creates video from captured screenshots
     """
-    Thread(target=do_screenshots).start()
-    Thread(target=delete_old_screenshots).start()
+    t1 = Thread(target=do_screenshots, kwargs={"ss_dir": SS_DIR})
+    t2 = Thread(
+        target=delete_old_screenshots, kwargs={"duration": DURATION, "ss_dir": SS_DIR}
+    )
+    t1.start()
+    t2.start()
     while True:
-        if not recognize_speech() == 'clip it':
+        if not recognize_speech() == "clip it":
             continue
-        return # stop threads and make video
+        t2.join()
+        t1.join()
+        return make_video("screenshoots", "output.mp4")
+
 
 if __name__ == "__main__":
     main()
