@@ -1,7 +1,6 @@
 import cv2
 import os
 
-
 def make_video(image_folder, video_name):
     """
     Creates video from screenshots

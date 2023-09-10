@@ -1,5 +1,4 @@
-from threading import Thread, Event
-import time
+from threading import Thread
 from recognize_speech import recognize_speech
 
 from screenshots import delete_old_screenshots, do_screenshots
@@ -25,6 +24,8 @@ def main():
         print(text)
         if not "clip it" in text:
             continue
+        t1.join()
+        t2.join()
         return make_video("screenshoots", "output.mp4")
 
 
