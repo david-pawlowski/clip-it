@@ -1,3 +1,4 @@
+import logging
 import speech_recognition as sr
 
 
@@ -17,7 +18,7 @@ def recognize_speech():
         except sr.exceptions.UnknownValueError:
             return None
         except sr.RequestError as e:
-            print(
+            logging.error(
                 "Could not request results from Google Speech Recognition service; {0}".format(
                     e
                 )
